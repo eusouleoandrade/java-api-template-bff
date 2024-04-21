@@ -1,4 +1,4 @@
-package com.project.bff.application.interfaces;
+package com.project.bff.application.interfaces.services;
 
 import java.util.concurrent.CompletableFuture;
 
