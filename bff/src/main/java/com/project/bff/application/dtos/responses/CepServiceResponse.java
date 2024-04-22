@@ -1,6 +1,6 @@
-package com.project.bff.application.dtos.models;
+package com.project.bff.application.dtos.responses;
 
-public class AddressModel {
+public class CepServiceResponse {
 
     private String cep;
 
@@ -22,7 +22,7 @@ public class AddressModel {
 
     private String siafi;
 
-    public AddressModel(String cep,
+    public CepServiceResponse(String cep,
             String logradouro,
             String complemento,
             String bairro,

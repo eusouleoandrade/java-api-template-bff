@@ -2,15 +2,15 @@ package com.project.bff.application.mappings;
 
 import org.springframework.stereotype.Component;
 
-import com.project.bff.application.dtos.models.AddressModel;
+import com.project.bff.application.dtos.responses.CepServiceResponse;
 import com.project.bff.application.dtos.responses.GetAddressUseCaseResponse;
 
 @Component
-public class GetAddressUseCaseResponseMapping {
+public class CepServiceResponseMapping {
 
-    public AddressModel convertToAddressModel(GetAddressUseCaseResponse response) {
+    public GetAddressUseCaseResponse convertToGetAddressUseCaseResponse(CepServiceResponse response) {
 
-        return new AddressModel(response.getCep(),
+        return new GetAddressUseCaseResponse(response.getCep(),
                 response.getLogradouro(),
                 response.getComplemento(),
                 response.getBairro(),

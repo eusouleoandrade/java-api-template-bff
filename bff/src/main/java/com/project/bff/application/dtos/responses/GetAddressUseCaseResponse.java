@@ -6,18 +6,43 @@ public class GetAddressUseCaseResponse {
 
     private String logradouro;
 
+    private String complemento;
+
     private String bairro;
 
     private String localidade;
 
-    private String estado;
+    private String uf;
 
-    public GetAddressUseCaseResponse(String cep, String logradouro, String bairro, String localidade, String estado) {
+    private String ibge;
+
+    private String gia;
+
+    private String ddd;
+
+    private String siafi;
+
+    public GetAddressUseCaseResponse(String cep,
+            String logradouro,
+            String complemento,
+            String bairro,
+            String localidade,
+            String uf,
+            String ibge,
+            String gia,
+            String ddd,
+            String siafi) {
+
         this.cep = cep;
         this.logradouro = logradouro;
+        this.complemento = complemento;
         this.bairro = bairro;
         this.localidade = localidade;
-        this.estado = estado;
+        this.uf = uf;
+        this.ibge = ibge;
+        this.gia = gia;
+        this.ddd = ddd;
+        this.siafi = siafi;
     }
 
     public String getCep() {
@@ -28,6 +53,10 @@ public class GetAddressUseCaseResponse {
         return logradouro;
     }
 
+    public String getComplemento() {
+        return complemento;
+    }
+
     public String getBairro() {
         return bairro;
     }
@@ -36,7 +65,23 @@ public class GetAddressUseCaseResponse {
         return localidade;
     }
 
-    public String getEstado() {
-        return estado;
+    public String getUf() {
+        return uf;
+    }
+
+    public String getIbge() {
+        return ibge;
+    }
+
+    public String getGia() {
+        return gia;
+    }
+
+    public String getDdd() {
+        return ddd;
+    }
+
+    public String getSiafi() {
+        return siafi;
     }
 }
