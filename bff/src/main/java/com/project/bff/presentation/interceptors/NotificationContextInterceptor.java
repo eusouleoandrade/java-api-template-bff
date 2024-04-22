@@ -39,10 +39,12 @@ public class NotificationContextInterceptor implements HandlerInterceptor {
 
             response.setContentType("application/json");
 
+            // Check if you have not found notifications
             boolean hasSingleErrorWithDataNotFound = notificationContext.getErrorNotifications().size() == 1 &&
                     notificationContext.getErrorNotifications().get(0).getKey()
                             .equals(MsgUltil.DATA_OF_X0_X1_NOT_FOUND(null, null)[0]);
 
+            // Check if you have entity validation notifications
             boolean hasValidationError = notificationContext.getErrorNotifications().get(0).getKey()
                     .contains(MsgUltil.X0_MUST_CONTAIN_X1_CHARACTERS(null, null)[0])
                     || notificationContext.getErrorNotifications().get(0).getKey()

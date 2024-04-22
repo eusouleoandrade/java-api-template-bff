@@ -12,7 +12,9 @@ import org.springframework.web.context.annotation.RequestScope;
 
 import com.project.bff.application.dtos.responses.GetAddressUseCaseResponse;
 import com.project.bff.application.interfaces.repositories.IAddressAuditRepositoryAsync;
+import com.project.bff.application.interfaces.services.ICepService;
 import com.project.bff.application.interfaces.useCases.IGetAddressUseCase;
+import com.project.bff.application.mappings.CepServiceResponseMapping;
 import com.project.bff.domain.entities.AddressAudit;
 import com.project.bff.shared.notifications.abstractions.Notifiable;
 import com.project.bff.shared.ultils.MsgUltil;
@@ -22,14 +24,23 @@ import com.project.bff.shared.ultils.MsgUltil;
 public class GetAddressUseCase extends Notifiable implements IGetAddressUseCase {
 
     private final IAddressAuditRepositoryAsync addressAuditRepositoryAsync;
+
     private final Logger logger = LoggerFactory.getLogger(GetAddressUseCase.class);
+
+    private final ICepService cepService;
+
+    private final CepServiceResponseMapping cepServiceResponseMapping;
 
     @Autowired
     private Environment env;
 
-    public GetAddressUseCase(IAddressAuditRepositoryAsync addressAuditRepositoryAsync) {
+    public GetAddressUseCase(IAddressAuditRepositoryAsync addressAuditRepositoryAsync,
+            ICepService cepService,
+            CepServiceResponseMapping cepServiceResponseMapping) {
 
         this.addressAuditRepositoryAsync = addressAuditRepositoryAsync;
+        this.cepService = cepService;
+        this.cepServiceResponseMapping = cepServiceResponseMapping;
     }
 
     @Override
@@ -48,12 +59,15 @@ public class GetAddressUseCase extends Notifiable implements IGetAddressUseCase 
             return CompletableFuture.completedFuture(null);
 
         // Integrations
+        var cepServiceResponse = cepService.getAddressAsync(request).join();
 
         // Audit
         var addressAudit = new AddressAudit(request, LocalDateTime.now());
+
         addressAuditRepositoryAsync.createAsync(addressAudit).join();
 
-        var useCaseResponse = new GetAddressUseCaseResponse("cep", "logradouro", "bairro", "localidade", "estado");
+        // Response
+        var useCaseResponse = cepServiceResponseMapping.convertToGetAddressUseCaseResponse(cepServiceResponse);
 
         logger.info(String.format("Finishes successfully useCase  %s > method runAsync.",
                 GetAddressUseCase.class.getSimpleName()));
