@@ -1,4 +1,4 @@
-package com.project.bff.infrastructure.integrations.cepIntegrationService;
+package com.project.bff.infrastructure.services;
 
 import java.util.concurrent.CompletableFuture;
 

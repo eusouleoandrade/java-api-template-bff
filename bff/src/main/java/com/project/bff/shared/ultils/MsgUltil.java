@@ -58,4 +58,9 @@ public class MsgUltil {
     public static String[] BAD_REQUEST() {
         return new String[] { "COD0011", "Bad request." };
     }
+
+    // COD0012
+    public static String[] X0_MUST_CONTAIN_X1_CHARACTERS(@Nullable String param0, @Nullable String param1) {
+        return new String[] { "COD0012", String.format("%s must contain %s characters.", param0, param1) };
+    }
 }
