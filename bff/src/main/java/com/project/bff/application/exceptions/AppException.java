@@ -4,6 +4,8 @@ import java.text.MessageFormat;
 
 public class AppException extends RuntimeException {
 
+    private String code;
+
     public AppException() {
         super();
     }
@@ -18,5 +20,15 @@ public class AppException extends RuntimeException {
 
     public AppException(String message, Throwable cause) {
         super(message, cause);
+    }
+
+    public AppException(String code, String message, Throwable cause) {
+        super(message, cause);
+
+        this.code = code;
+    }
+
+    public String getCode() {
+        return code;
     }
 }

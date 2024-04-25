@@ -63,4 +63,9 @@ public class MsgUltil {
     public static String[] X0_MUST_CONTAIN_X1_CHARACTERS(@Nullable String param0, @Nullable String param1) {
         return new String[] { "COD0012", String.format("%s must contain %s characters.", param0, param1) };
     }
+
+    // COD0013
+    public static String[] FAILED_TO_INTEGRATE_WITH_X0(@Nullable String param0) {
+        return new String[] { "COD0013", String.format("Failed to integrate with %s.", param0) };
+    }
 }
