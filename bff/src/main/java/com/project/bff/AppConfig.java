@@ -9,7 +9,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
-public class Startup {
+public class AppConfig {
 
     @Bean
     DataSource dataSource() {
