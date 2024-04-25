@@ -58,7 +58,7 @@ public class AddressAuditRepositoryAsync implements IAddressAuditRepositoryAsync
 
             logger.error(MsgUltil.DATA_BASE_SERVER_ERROR()[1] + " - Error: " + ex.getMessage(), ex);
 
-            throw new AppException(MsgUltil.DATA_BASE_SERVER_ERROR()[1], ex);
+            throw new AppException(MsgUltil.DATA_BASE_SERVER_ERROR()[0], MsgUltil.DATA_BASE_SERVER_ERROR()[1], ex);
 
         } finally {
 
