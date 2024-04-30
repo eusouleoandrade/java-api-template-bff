@@ -1,5 +1,6 @@
 package com.project.bff.application.dtos.responses;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -8,8 +9,11 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.project.bff.application.dtos.models.AddressModel;
+import com.project.bff.shared.ultils.MsgUltil;
+
 @SpringBootTest
-public class CepServiceResponseTest {
+public class GetAddressResponseTest {
 
     @DisplayName("Should execute successfully when to use the parameterized constructor")
     @ParameterizedTest
@@ -29,23 +33,28 @@ public class CepServiceResponseTest {
             String siafi) {
 
         // Arranje
-        CepServiceResponse response;
+        var addressModel = new AddressModel(cep,
+                logradouro,
+                complemento,
+                bairro,
+                localidade,
+                uf,
+                ibge,
+                gia,
+                ddd,
+                siafi);
+
+        GetAddressResponse response;
 
         // Act
-        response = new CepServiceResponse(cep, logradouro, complemento, bairro, localidade, uf, ibge, gia, ddd, siafi);
+        response = new GetAddressResponse(addressModel);
 
         // Assert
         assertNotNull(response);
 
-        assertEquals(cep, response.getCep());
-        assertEquals(logradouro, response.getLogradouro());
-        assertEquals(complemento, response.getComplemento());
-        assertEquals(bairro, response.getBairro());
-        assertEquals(localidade, response.getLocalidade());
-        assertEquals(uf, response.getUf());
-        assertEquals(ibge, response.getIbge());
-        assertEquals(gia, response.getGia());
-        assertEquals(ddd, response.getDdd());
-        assertEquals(siafi, response.getSiafi());
+        assertThat(response.getAddressModel()).isEqualTo(addressModel);
+
+        assertThat(response.isSucceeded()).isTrue();
+        assertEquals(MsgUltil.RESPONSE_SUCCEEDED_MESSAGE()[1], response.getMessage());
     }
 }

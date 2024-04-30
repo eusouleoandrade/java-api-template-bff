@@ -1,7 +1,6 @@
 package com.project.bff.application.dtos.responses;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -9,7 +8,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class CepServiceResponseTest {
+public class GetAddressUseCaseResponseTest {
 
     @DisplayName("Should execute successfully when to use the parameterized constructor")
     @ParameterizedTest
@@ -29,23 +28,31 @@ public class CepServiceResponseTest {
             String siafi) {
 
         // Arranje
-        CepServiceResponse response;
+        GetAddressUseCaseResponse response;
 
         // Act
-        response = new CepServiceResponse(cep, logradouro, complemento, bairro, localidade, uf, ibge, gia, ddd, siafi);
+        response = new GetAddressUseCaseResponse(cep,
+                logradouro,
+                complemento,
+                bairro,
+                localidade,
+                uf,
+                ibge,
+                gia,
+                ddd,
+                siafi);
 
         // Assert
-        assertNotNull(response);
+        assertThat(response).isNotNull();
 
-        assertEquals(cep, response.getCep());
-        assertEquals(logradouro, response.getLogradouro());
-        assertEquals(complemento, response.getComplemento());
-        assertEquals(bairro, response.getBairro());
-        assertEquals(localidade, response.getLocalidade());
-        assertEquals(uf, response.getUf());
-        assertEquals(ibge, response.getIbge());
-        assertEquals(gia, response.getGia());
-        assertEquals(ddd, response.getDdd());
-        assertEquals(siafi, response.getSiafi());
+        assertThat(response.getCep()).isEqualTo(cep);
+        assertThat(response.getLogradouro()).isEqualTo(logradouro);
+        assertThat(response.getBairro()).isEqualTo(bairro);
+        assertThat(response.getLocalidade()).isEqualTo(localidade);
+        assertThat(response.getUf()).isEqualTo(uf);
+        assertThat(response.getIbge()).isEqualTo(ibge);
+        assertThat(response.getGia()).isEqualTo(gia);
+        assertThat(response.getDdd()).isEqualTo(ddd);
+        assertThat(response.getSiafi()).isEqualTo(siafi);
     }
 }
