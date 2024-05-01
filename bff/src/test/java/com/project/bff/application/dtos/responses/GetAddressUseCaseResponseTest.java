@@ -47,6 +47,7 @@ public class GetAddressUseCaseResponseTest {
 
         assertThat(response.getCep()).isEqualTo(cep);
         assertThat(response.getLogradouro()).isEqualTo(logradouro);
+        assertThat(response.getComplemento()).isEqualTo(complemento);
         assertThat(response.getBairro()).isEqualTo(bairro);
         assertThat(response.getLocalidade()).isEqualTo(localidade);
         assertThat(response.getUf()).isEqualTo(uf);
