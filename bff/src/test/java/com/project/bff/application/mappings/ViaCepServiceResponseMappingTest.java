@@ -15,6 +15,7 @@ public class ViaCepServiceResponseMappingTest {
     @DisplayName("Test convert ViaCepServiceResponse to CepServiceResponse")
     @Test
     public void testConvertToCepServiceResponse() {
+
         // Arrange
         ViaCepServiceResponse viaCepServiceResponse = new ViaCepServiceResponse();
         viaCepServiceResponse.setCep("12345-678");

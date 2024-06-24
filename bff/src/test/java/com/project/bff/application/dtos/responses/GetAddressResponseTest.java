@@ -2,7 +2,6 @@ package com.project.bff.application.dtos.responses;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,13 +14,13 @@ import com.project.bff.shared.ultils.MsgUltil;
 @SpringBootTest
 public class GetAddressResponseTest {
 
-    @DisplayName("Should execute successfully when to use the parameterized constructor")
+    @DisplayName("Test GetAddressResponse Constructor and Getters")
     @ParameterizedTest
     @CsvSource({
-            "01001-000, Praça da Sé, lado ímpar, Sé, São Paulo, SP, 3550308, 1004, 11, 7107",
-            "02001-000, Parque Anhembi, , Santana, São Paulo, SP, 3550308, 1004, 11, 7107"
+            "12345-678, Rua Exemplo 1, Apto 101, Centro, Cidade Exemplo 1, EX, 1234567, 98765, 11, 1234",
+            "56789-012, Rua Exemplo 2, Apto 102, Centro, Cidade Exemplo 2, AX, 5678901, 54321, 11, 5678"
     })
-    public void shouldExecuteSuccessfullyWhenToUseTheParameterizedCtor(String cep,
+    public void testGetAddressResponseConstructorAndGetters(String cep,
             String logradouro,
             String complemento,
             String bairro,
@@ -32,29 +31,28 @@ public class GetAddressResponseTest {
             String ddd,
             String siafi) {
 
-        // Arranje
-        var addressModel = new AddressModel(cep,
-                logradouro,
-                complemento,
-                bairro,
-                localidade,
-                uf,
-                ibge,
-                gia,
-                ddd,
-                siafi);
-
-        GetAddressResponse response;
+        // Arrange
+        AddressModel addressModel = new AddressModel(cep, logradouro, complemento, bairro, localidade, uf, ibge,
+                gia, ddd, siafi);
 
         // Act
-        response = new GetAddressResponse(addressModel);
+        GetAddressResponse getAddressResponse = new GetAddressResponse(addressModel);
 
         // Assert
-        assertNotNull(response);
+        assertThat(getAddressResponse).isNotNull();
+        assertThat(getAddressResponse.isSucceeded()).isTrue();
+        assertThat(getAddressResponse.getAddressModel()).isEqualTo(addressModel);
+        assertThat(getAddressResponse.getAddressModel().getCep()).isEqualTo(cep);
+        assertThat(getAddressResponse.getAddressModel().getLogradouro()).isEqualTo(logradouro);
+        assertThat(getAddressResponse.getAddressModel().getComplemento()).isEqualTo(complemento);
+        assertThat(getAddressResponse.getAddressModel().getBairro()).isEqualTo(bairro);
+        assertThat(getAddressResponse.getAddressModel().getLocalidade()).isEqualTo(localidade);
+        assertThat(getAddressResponse.getAddressModel().getUf()).isEqualTo(uf);
+        assertThat(getAddressResponse.getAddressModel().getIbge()).isEqualTo(ibge);
+        assertThat(getAddressResponse.getAddressModel().getGia()).isEqualTo(gia);
+        assertThat(getAddressResponse.getAddressModel().getDdd()).isEqualTo(ddd);
+        assertThat(getAddressResponse.getAddressModel().getSiafi()).isEqualTo(siafi);
 
-        assertThat(response.getAddressModel()).isEqualTo(addressModel);
-
-        assertThat(response.isSucceeded()).isTrue();
-        assertEquals(MsgUltil.RESPONSE_SUCCEEDED_MESSAGE()[1], response.getMessage());
+        assertEquals(MsgUltil.RESPONSE_SUCCEEDED_MESSAGE()[1], getAddressResponse.getMessage());
     }
 }

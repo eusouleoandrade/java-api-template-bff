@@ -1,7 +1,6 @@
 package com.project.bff.application.dtos.responses;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,13 +10,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class CepServiceResponseTest {
 
-    @DisplayName("Should execute successfully when to use the parameterized constructor")
+    @DisplayName("Test CepServiceResponse Constructor and Getters")
     @ParameterizedTest
     @CsvSource({
-            "01001-000, Praça da Sé, lado ímpar, Sé, São Paulo, SP, 3550308, 1004, 11, 7107",
-            "02001-000, Parque Anhembi, , Santana, São Paulo, SP, 3550308, 1004, 11, 7107"
+            "12345-678, Rua Exemplo 1, Apto 101, Centro, Cidade Exemplo 1, EX, 1234567, 98765, 11, 1234",
+            "56789-012, Rua Exemplo 2, Apto 102, Centro, Cidade Exemplo 2, AX, 5678901, 54321, 11, 5678"
     })
-    public void shouldExecuteSuccessfullyWhenToUseTheParameterizedCtor(String cep,
+    public void testCepServiceResponseConstructorAndGetters(String cep,
             String logradouro,
             String complemento,
             String bairro,
@@ -28,24 +27,24 @@ public class CepServiceResponseTest {
             String ddd,
             String siafi) {
 
-        // Arranje
-        CepServiceResponse response;
+        // Arrange
+        CepServiceResponse cepServiceResponse;
 
         // Act
-        response = new CepServiceResponse(cep, logradouro, complemento, bairro, localidade, uf, ibge, gia, ddd, siafi);
+        cepServiceResponse = new CepServiceResponse(cep, logradouro, complemento, bairro, localidade, uf, ibge, gia,
+                ddd, siafi);
 
         // Assert
-        assertNotNull(response);
-
-        assertEquals(cep, response.getCep());
-        assertEquals(logradouro, response.getLogradouro());
-        assertEquals(complemento, response.getComplemento());
-        assertEquals(bairro, response.getBairro());
-        assertEquals(localidade, response.getLocalidade());
-        assertEquals(uf, response.getUf());
-        assertEquals(ibge, response.getIbge());
-        assertEquals(gia, response.getGia());
-        assertEquals(ddd, response.getDdd());
-        assertEquals(siafi, response.getSiafi());
+        assertThat(cepServiceResponse).isNotNull();
+        assertThat(cepServiceResponse.getCep()).isEqualTo(cep);
+        assertThat(cepServiceResponse.getLogradouro()).isEqualTo(logradouro);
+        assertThat(cepServiceResponse.getComplemento()).isEqualTo(complemento);
+        assertThat(cepServiceResponse.getBairro()).isEqualTo(bairro);
+        assertThat(cepServiceResponse.getLocalidade()).isEqualTo(localidade);
+        assertThat(cepServiceResponse.getUf()).isEqualTo(uf);
+        assertThat(cepServiceResponse.getIbge()).isEqualTo(ibge);
+        assertThat(cepServiceResponse.getGia()).isEqualTo(gia);
+        assertThat(cepServiceResponse.getDdd()).isEqualTo(ddd);
+        assertThat(cepServiceResponse.getSiafi()).isEqualTo(siafi);
     }
 }

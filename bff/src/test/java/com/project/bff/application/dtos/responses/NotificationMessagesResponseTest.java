@@ -5,8 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.project.bff.shared.notifications.models.NotificationMessage;
@@ -15,63 +14,60 @@ import com.project.bff.shared.ultils.MsgUltil;
 @SpringBootTest
 public class NotificationMessagesResponseTest {
 
-    @DisplayName("Should execute successfully when to use the parameterized constructor")
-    @ParameterizedTest
-    @CsvSource({
-            "COD0001, Notification message 1.",
-            "COD0002, Notification message 2.",
-            "COD0003, Notification message 3."
-    })
-    public void shouldExecuteSuccessfullyWhenToUseTheParameterizedCtor(String key, String message) {
+    @DisplayName("Test NotificationMessagesResponse Constructor and Getters")
+    @Test
+    public void testNotificationMessagesResponseConstructorAndGetters() {
 
-        // Arranje
-        var notificationMessage = new NotificationMessage(key, message);
+        // Arrange
+        NotificationMessage error1 = new NotificationMessage("Error 1", "E001");
+        NotificationMessage error2 = new NotificationMessage("Error 2", "E002");
 
-        var notificationMesssageList = new ArrayList<NotificationMessage>();
-        notificationMesssageList.add(notificationMessage);
+        var errors = new ArrayList<NotificationMessage>();
+        errors.add(error1);
+        errors.add(error2);
 
         // Act
-        NotificationMessagesResponse response = new NotificationMessagesResponse(notificationMesssageList);
+        NotificationMessagesResponse response = new NotificationMessagesResponse(errors);
 
         // Assert
         assertThat(response).isNotNull();
 
-        assertThat(response.getErrors()).isNotEmpty();
-        assertThat(response.getErrors()).hasSize(1);
-        assertThat(response.getErrors()).isEqualTo(notificationMesssageList);
-
         assertThat(response.isSucceeded()).isFalse();
+
+        assertThat(response.getErrors()).isNotEmpty();
+        assertThat(response.getErrors()).hasSize(2);
+        assertThat(response.getErrors()).isEqualTo(errors);
+        assertThat(response.getErrors()).containsExactly(error1, error2);
 
         assertThat(response.getMessage()).isEqualTo(MsgUltil.RESPONSE_FAILED_PROCESS_REQUEST()[1]);
     }
 
-    @DisplayName("Should execute successfully when to use the set errors")
-    @ParameterizedTest
-    @CsvSource({
-            "COD0001, Notification message 1.",
-            "COD0002, Notification message 2.",
-            "COD0003, Notification message 3."
-    })
-    public void shouldExecuteSuccessfullyWhenToUseSetErrors(String key, String message) {
+    @DisplayName("Test Set Errors")
+    @Test
+    public void testSetErrors() {
 
-        // Arranje
-        var notificationMessage = new NotificationMessage(key, message);
+        // Arrange
+        NotificationMessage error1 = new NotificationMessage("Error 1", "E001");
+        NotificationMessage error2 = new NotificationMessage("Error 2", "E002");
 
-        var notificationMesssageList = new ArrayList<NotificationMessage>();
-        notificationMesssageList.add(notificationMessage);
+        var errors = new ArrayList<NotificationMessage>();
+        errors.add(error1);
+        errors.add(error2);
+
+        NotificationMessagesResponse response = new NotificationMessagesResponse(null);
 
         // Act
-        NotificationMessagesResponse response = new NotificationMessagesResponse(null);
-        response.setErrors(notificationMesssageList);
+        response.setErrors(errors);
 
         // Assert
         assertThat(response).isNotNull();
 
-        assertThat(response.getErrors()).isNotEmpty();
-        assertThat(response.getErrors()).hasSize(1);
-        assertThat(response.getErrors()).isEqualTo(notificationMesssageList);
-
         assertThat(response.isSucceeded()).isFalse();
+
+        assertThat(response.getErrors()).isNotEmpty();
+        assertThat(response.getErrors()).hasSize(2);
+        assertThat(response.getErrors()).isEqualTo(errors);
+        assertThat(response.getErrors()).containsExactly(error1, error2);
 
         assertThat(response.getMessage()).isEqualTo(MsgUltil.RESPONSE_FAILED_PROCESS_REQUEST()[1]);
     }

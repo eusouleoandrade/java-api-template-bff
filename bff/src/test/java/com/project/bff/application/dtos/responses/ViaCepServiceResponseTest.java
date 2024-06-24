@@ -10,13 +10,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class ViaCepServiceResponseTest {
 
-    @DisplayName("Should execute successfully when to use the getters and setters")
+    @DisplayName("Test ViaCepServiceResponse Getters and Setters")
     @ParameterizedTest
     @CsvSource({
-            "01001-000, Praça da Sé, lado ímpar, Sé, São Paulo, SP, 3550308, 1004, 11, 7107",
-            "02001-000, Parque Anhembi, , Santana, São Paulo, SP, 3550308, 1004, 11, 7107"
+            "12345-678, Rua Exemplo 1, Apto 101, Centro, Cidade Exemplo 1, EX, 1234567, 98765, 11, 1234",
+            "56789-012, Rua Exemplo 2, Apto 102, Centro, Cidade Exemplo 2, AX, 5678901, 54321, 11, 5678"
     })
-    public void shouldExecuteSuccessfullyWhenToUseTheGettersAndSetters(String cep,
+    public void testViaCepServiceResponseGettersAndSetters(String cep,
             String logradouro,
             String complemento,
             String bairro,
@@ -27,11 +27,10 @@ public class ViaCepServiceResponseTest {
             String ddd,
             String siafi) {
 
-        // Arranje
-        ViaCepServiceResponse response;
+        // Arrange
+        ViaCepServiceResponse response = new ViaCepServiceResponse();
 
         // Act
-        response = new ViaCepServiceResponse();
         response.setCep(cep);
         response.setLogradouro(logradouro);
         response.setComplemento(complemento);
