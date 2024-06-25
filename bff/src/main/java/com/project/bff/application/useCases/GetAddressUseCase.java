@@ -5,7 +5,6 @@ import java.util.concurrent.CompletableFuture;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.RequestScope;
@@ -31,16 +30,17 @@ public class GetAddressUseCase extends Notifiable implements IGetAddressUseCase 
 
     private final CepServiceResponseMapping cepServiceResponseMapping;
 
-    @Autowired
-    private Environment env;
+    private final Environment env;
 
     public GetAddressUseCase(IAddressAuditRepositoryAsync addressAuditRepositoryAsync,
             ICepService cepService,
-            CepServiceResponseMapping cepServiceResponseMapping) {
+            CepServiceResponseMapping cepServiceResponseMapping,
+            Environment env) {
 
         this.addressAuditRepositoryAsync = addressAuditRepositoryAsync;
         this.cepService = cepService;
         this.cepServiceResponseMapping = cepServiceResponseMapping;
+        this.env = env;
     }
 
     @Override
@@ -83,14 +83,17 @@ public class GetAddressUseCase extends Notifiable implements IGetAddressUseCase 
     private void validate(String cep) {
 
         if (cep == null || cep.trim().isEmpty()) {
+
             addErrorNotification(MsgUltil.X0_IS_REQUIRED(null)[0], MsgUltil.X0_IS_REQUIRED("Cep")[1]);
-        }
+        } else {
 
-        int numberOfCharacters = Integer.valueOf(env.getProperty("cep.numberOfCharacters"));
+            int numberOfCharacters = Integer.valueOf(env.getProperty("cep.numberOfCharacters"));
 
-        if (cep.length() != numberOfCharacters) {
-            addErrorNotification(MsgUltil.X0_MUST_CONTAIN_X1_CHARACTERS(null, null)[0],
-                    MsgUltil.X0_MUST_CONTAIN_X1_CHARACTERS("Cep", String.valueOf(numberOfCharacters))[1]);
+            if (cep.length() != numberOfCharacters) {
+
+                addErrorNotification(MsgUltil.X0_MUST_CONTAIN_X1_CHARACTERS(null, null)[0],
+                        MsgUltil.X0_MUST_CONTAIN_X1_CHARACTERS("Cep", String.valueOf(numberOfCharacters))[1]);
+            }
         }
     }
 }
