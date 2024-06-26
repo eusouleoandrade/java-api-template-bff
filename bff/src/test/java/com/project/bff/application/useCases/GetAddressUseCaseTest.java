@@ -52,7 +52,7 @@ public class GetAddressUseCaseTest {
         when(env.getProperty("cep.numberOfCharacters")).thenReturn("8");
     }
 
-    @DisplayName("Test RunAsync Success")
+    @DisplayName("Test RunAsync success")
     @ParameterizedTest
     @CsvSource({
             "12345-678, 12345678, Rua Exemplo 1, Apto 101, Centro, Cidade Exemplo 1, EX, 1234567, 98765, 11, 1234",
@@ -114,13 +114,13 @@ public class GetAddressUseCaseTest {
                         "Finishes successfully useCase  GetAddressUseCase > method runAsync.");
     }
 
-    @DisplayName("Test RunAsync with invalid Cep")
+    @DisplayName("Test RunAsync failure with invalid cep")
     @ParameterizedTest
     @CsvSource({
             "12345",
             "12345-56"
     })
-    public void testRunAsyncWithInvalidCep(String cep) {
+    public void testRunAsyncFailureWithInvalidCep(String cep) {
 
         // Arranje
         useCase = new GetAddressUseCase(addressAuditRepositoryAsync, cepService, cepServiceResponseMapping, env);
@@ -148,12 +148,12 @@ public class GetAddressUseCaseTest {
                 .doesNotContain("Finishes successfully useCase  GetAddressUseCase > method runAsync.");
     }
 
-    @DisplayName("Test RunAsync with empty Cep")
+    @DisplayName("Test RunAsync failure with null or empty cep")
     @Test
-    public void testRunAsyncWithEmptyCep() {
+    public void testRunAsyncFailureWithNullOrEmptyCep() {
 
         // Arrange
-        String[] ceps = { "", " " };
+        String[] ceps = { null, "", " " };
 
         for (String cep : ceps) {
 

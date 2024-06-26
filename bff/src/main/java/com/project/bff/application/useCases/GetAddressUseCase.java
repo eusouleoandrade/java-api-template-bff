@@ -77,7 +77,7 @@ public class GetAddressUseCase extends Notifiable implements IGetAddressUseCase 
 
     private String sanitize(String cep) {
 
-        return cep.replaceAll("[^0-9]", "");
+        return cep != null ? cep.replaceAll("[^0-9]", "") : cep;
     }
 
     private void validate(String cep) {
