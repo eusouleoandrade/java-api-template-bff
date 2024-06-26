@@ -56,7 +56,7 @@ public class ViaCepService implements ICepService {
 
         } catch (Exception ex) {
 
-            logger.error(MsgUltil.FAILED_TO_INTEGRATE_WITH_X0("ViaCep API") + " - Error: " + ex.getMessage(), ex);
+            logger.error(MsgUltil.FAILED_TO_INTEGRATE_WITH_X0("ViaCep API")[1] + " - Error: " + ex.getMessage(), ex);
 
             throw new AppException(MsgUltil.FAILED_TO_INTEGRATE_WITH_X0("ViaCep API")[0],
                     MsgUltil.FAILED_TO_INTEGRATE_WITH_X0("ViaCep API")[1], ex);
