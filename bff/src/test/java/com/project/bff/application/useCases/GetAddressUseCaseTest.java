@@ -144,6 +144,7 @@ public class GetAddressUseCaseTest {
 
         assertThat(logCaptor.getInfoLogs())
                 .contains("Start useCase GetAddressUseCase > method runAsync.");
+
         assertThat(logCaptor.getInfoLogs())
                 .doesNotContain("Finishes successfully useCase  GetAddressUseCase > method runAsync.");
     }
@@ -178,6 +179,7 @@ public class GetAddressUseCaseTest {
 
             assertThat(logCaptor.getInfoLogs())
                     .containsExactly("Start useCase GetAddressUseCase > method runAsync.");
+
             assertThat(logCaptor.getInfoLogs())
                     .doesNotContain("Finishes successfully useCase  GetAddressUseCase > method runAsync.");
         }
