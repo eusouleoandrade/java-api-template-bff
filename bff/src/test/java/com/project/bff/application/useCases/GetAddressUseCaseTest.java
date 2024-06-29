@@ -88,7 +88,8 @@ public class GetAddressUseCaseTest {
         when(cepServiceResponseMapping.convertToGetAddressUseCaseResponse(cepServiceResponse))
                 .thenReturn(useCaseExpectedResponse);
 
-        useCase = new GetAddressUseCase(addressAuditRepositoryAsync, cepService, cepServiceResponseMapping, env);
+        useCase = new GetAddressUseCase(addressAuditRepositoryAsync, cepService, cepServiceResponseMapping,
+                env);
 
         logCaptor = LogCaptor.forClass(GetAddressUseCase.class);
 
@@ -123,7 +124,8 @@ public class GetAddressUseCaseTest {
     public void testRunAsyncFailureWithInvalidCep(String cep) {
 
         // Arranje
-        useCase = new GetAddressUseCase(addressAuditRepositoryAsync, cepService, cepServiceResponseMapping, env);
+        useCase = new GetAddressUseCase(addressAuditRepositoryAsync, cepService, cepServiceResponseMapping,
+                env);
 
         logCaptor = LogCaptor.forClass(GetAddressUseCase.class);
 
@@ -158,7 +160,8 @@ public class GetAddressUseCaseTest {
 
         for (String cep : ceps) {
 
-            useCase = new GetAddressUseCase(addressAuditRepositoryAsync, cepService, cepServiceResponseMapping, env);
+            useCase = new GetAddressUseCase(addressAuditRepositoryAsync, cepService,
+                    cepServiceResponseMapping, env);
 
             logCaptor = LogCaptor.forClass(GetAddressUseCase.class);
 
@@ -178,9 +181,7 @@ public class GetAddressUseCaseTest {
                     .isEqualTo(MsgUltil.X0_IS_REQUIRED("Cep")[1]);
 
             assertThat(logCaptor.getInfoLogs())
-                    .containsExactly("Start useCase GetAddressUseCase > method runAsync.");
-
-            assertThat(logCaptor.getInfoLogs())
+                    .containsExactly("Start useCase GetAddressUseCase > method runAsync.")
                     .doesNotContain("Finishes successfully useCase  GetAddressUseCase > method runAsync.");
         }
     }

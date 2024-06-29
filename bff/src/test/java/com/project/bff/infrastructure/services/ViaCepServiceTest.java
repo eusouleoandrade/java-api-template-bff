@@ -59,7 +59,8 @@ public class ViaCepServiceTest {
     @DisplayName("Test GetAddressAsync success")
     @ParameterizedTest
     @CsvSource({
-            "12345-678, 12345678, Rua Exemplo 1, Apto 101, Centro, Cidade Exemplo 1, EX, 1234567, 98765, 11, 1234"
+            "12345-678, 12345678, Rua Exemplo 1, Apto 101, Centro, Cidade Exemplo 1, EX, 1234567, 98765, 11, 1234",
+            "11223-445, 11223445,  Rua Exemplo 2, Apto 102, Centro, Cidade Exemplo 2, EX, 1122334, 11223, 22, 1122"
     })
     public void testGetAddressAsyncSuccess(String outputCep,
             String inputCep,
@@ -78,7 +79,8 @@ public class ViaCepServiceTest {
 
         ViaCepServiceResponse viaCepServiceResponse = new ViaCepServiceResponse();
 
-        CepServiceResponse cepServiceExpectedResponse = new CepServiceResponse(outputCep, logradouro, complemento,
+        CepServiceResponse cepServiceExpectedResponse = new CepServiceResponse(outputCep, logradouro,
+                complemento,
                 bairro, localidade, uf, ibge, gia, ddd, siafi);
 
         when(restTemplate.getForObject(anyString(), eq(ViaCepServiceResponse.class)))
@@ -101,7 +103,8 @@ public class ViaCepServiceTest {
         assertThat(serviceResponse).isEqualTo(cepServiceExpectedResponse);
 
         verify(restTemplate, times(1)).getForObject(fullUrl, ViaCepServiceResponse.class);
-        verify(viaCepServiceResponseMapping, times(1)).convertToCepServiceResponse(any(ViaCepServiceResponse.class));
+        verify(viaCepServiceResponseMapping, times(1))
+                .convertToCepServiceResponse(any(ViaCepServiceResponse.class));
 
         assertThat(logCaptor.getInfoLogs())
                 .containsExactly(
@@ -132,7 +135,8 @@ public class ViaCepServiceTest {
 
         verify(restTemplate, times(1)).getForObject(fullUrl, ViaCepServiceResponse.class);
 
-        verify(viaCepServiceResponseMapping, never()).convertToCepServiceResponse(any(ViaCepServiceResponse.class));
+        verify(viaCepServiceResponseMapping, never())
+                .convertToCepServiceResponse(any(ViaCepServiceResponse.class));
 
         assertThat(logCaptor.getInfoLogs())
                 .containsExactly(
@@ -142,6 +146,7 @@ public class ViaCepServiceTest {
 
         assertThat(logCaptor.getErrorLogs())
                 .containsExactly(
-                        MsgUltil.FAILED_TO_INTEGRATE_WITH_X0("ViaCep API")[1] + " - Error: Integration error");
+                        MsgUltil.FAILED_TO_INTEGRATE_WITH_X0("ViaCep API")[1]
+                                + " - Error: Integration error");
     }
 }
