@@ -31,7 +31,7 @@ public class AddressAuditRepositoryAsync implements IAddressAuditRepositoryAsync
         logger.info(String.format("Start repository %s > method createAsync.",
                 AddressAuditRepositoryAsync.class.getSimpleName()));
 
-        String query = "INSERT INTO addressAudit (cep, dataHora) VALUES (:cep, :dataHora)";
+        String query = "INSERT INTO bffdb.addressAudit (cep, dataHora) VALUES (:cep, :dataHora)";
 
         MapSqlParameterSource params = new MapSqlParameterSource()
                 .addValue("cep", entity.getCep())
