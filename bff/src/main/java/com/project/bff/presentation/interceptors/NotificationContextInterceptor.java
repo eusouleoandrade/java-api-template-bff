@@ -14,7 +14,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.bff.application.dtos.responses.NotificationMessagesResponse;
 import com.project.bff.shared.notifications.contexts.NotificationContext;
-import com.project.bff.shared.ultils.MsgUltil;
+import com.project.bff.shared.ultils.MsgUtil;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -42,15 +42,15 @@ public class NotificationContextInterceptor implements HandlerInterceptor {
             // Check if you have not found notifications
             boolean hasSingleErrorWithDataNotFound = notificationContext.getErrorNotifications().size() == 1 &&
                     notificationContext.getErrorNotifications().get(0).getKey()
-                            .equals(MsgUltil.DATA_OF_X0_X1_NOT_FOUND(null, null)[0]);
+                            .equals(MsgUtil.DATA_OF_X0_X1_NOT_FOUND(null, null)[0]);
 
             // Check if you have entity validation notifications
             boolean hasValidationError = notificationContext.getErrorNotifications().get(0).getKey()
-                    .contains(MsgUltil.X0_MUST_CONTAIN_X1_CHARACTERS(null, null)[0])
+                    .contains(MsgUtil.X0_MUST_CONTAIN_X1_CHARACTERS(null, null)[0])
                     || notificationContext.getErrorNotifications().get(0).getKey()
-                            .contains(MsgUltil.X0_IS_REQUIRED(null)[0])
+                            .contains(MsgUtil.X0_IS_REQUIRED(null)[0])
                     || notificationContext.getErrorNotifications().get(0).getKey()
-                            .contains(MsgUltil.IDENTIFIER_X0_IS_INVALID(null)[0]);
+                            .contains(MsgUtil.IDENTIFIER_X0_IS_INVALID(null)[0]);
 
             if (hasSingleErrorWithDataNotFound) {
 

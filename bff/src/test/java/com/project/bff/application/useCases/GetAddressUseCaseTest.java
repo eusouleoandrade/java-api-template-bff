@@ -23,7 +23,7 @@ import com.project.bff.application.interfaces.repositories.IAddressAuditReposito
 import com.project.bff.application.interfaces.services.ICepService;
 import com.project.bff.application.mappings.CepServiceResponseMapping;
 import com.project.bff.domain.entities.AddressAudit;
-import com.project.bff.shared.ultils.MsgUltil;
+import com.project.bff.shared.ultils.MsgUtil;
 
 import nl.altindag.log.LogCaptor;
 
@@ -140,9 +140,9 @@ public class GetAddressUseCaseTest {
         assertThat(useCase.getErrorNotifications()).hasSize(1);
 
         assertThat(useCase.getErrorNotifications().get(0).getKey())
-                .isEqualTo(MsgUltil.X0_MUST_CONTAIN_X1_CHARACTERS(null, null)[0]);
+                .isEqualTo(MsgUtil.X0_MUST_CONTAIN_X1_CHARACTERS(null, null)[0]);
         assertThat(useCase.getErrorNotifications().get(0).getMessage())
-                .isEqualTo(MsgUltil.X0_MUST_CONTAIN_X1_CHARACTERS("Cep", "8")[1]);
+                .isEqualTo(MsgUtil.X0_MUST_CONTAIN_X1_CHARACTERS("Cep", "8")[1]);
 
         assertThat(logCaptor.getInfoLogs())
                 .contains("Start useCase GetAddressUseCase > method runAsync.");
@@ -176,9 +176,9 @@ public class GetAddressUseCaseTest {
             assertThat(useCase.getErrorNotifications()).hasSize(1);
 
             assertThat(useCase.getErrorNotifications().get(0).getKey())
-                    .isEqualTo(MsgUltil.X0_IS_REQUIRED(null)[0]);
+                    .isEqualTo(MsgUtil.X0_IS_REQUIRED(null)[0]);
             assertThat(useCase.getErrorNotifications().get(0).getMessage())
-                    .isEqualTo(MsgUltil.X0_IS_REQUIRED("Cep")[1]);
+                    .isEqualTo(MsgUtil.X0_IS_REQUIRED("Cep")[1]);
 
             assertThat(logCaptor.getInfoLogs())
                     .containsExactly("Start useCase GetAddressUseCase > method runAsync.")

@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.project.bff.application.dtos.models.AddressModel;
-import com.project.bff.shared.ultils.MsgUltil;
+import com.project.bff.shared.ultils.MsgUtil;
 
 @SpringBootTest
 public class GetAddressResponseTest {
@@ -53,6 +53,6 @@ public class GetAddressResponseTest {
         assertThat(getAddressResponse.getAddressModel().getDdd()).isEqualTo(ddd);
         assertThat(getAddressResponse.getAddressModel().getSiafi()).isEqualTo(siafi);
 
-        assertEquals(MsgUltil.RESPONSE_SUCCEEDED_MESSAGE()[1], getAddressResponse.getMessage());
+        assertEquals(MsgUtil.RESPONSE_SUCCEEDED_MESSAGE()[1], getAddressResponse.getMessage());
     }
 }

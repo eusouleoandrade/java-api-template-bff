@@ -19,7 +19,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import com.project.bff.application.exceptions.AppException;
 import com.project.bff.domain.entities.AddressAudit;
-import com.project.bff.shared.ultils.MsgUltil;
+import com.project.bff.shared.ultils.MsgUtil;
 
 import nl.altindag.log.LogCaptor;
 
@@ -126,6 +126,6 @@ public class AddressAuditRepositoryAsyncTest {
 
         assertThat(logCaptor.getErrorLogs())
                 .containsExactly(
-                        MsgUltil.DATA_BASE_SERVER_ERROR()[1] + " - Error: Database error");
+                        MsgUtil.DATA_BASE_SERVER_ERROR()[1] + " - Error: Database error");
     }
 }

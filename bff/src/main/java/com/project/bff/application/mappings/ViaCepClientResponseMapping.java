@@ -1,14 +1,15 @@
 package com.project.bff.application.mappings;
 
+import com.project.bff.application.dtos.responses.CepServiceResponse;
+import com.project.bff.application.dtos.responses.ViaCepClientResponse;
+
 import org.springframework.stereotype.Component;
 
-import com.project.bff.application.dtos.responses.CepServiceResponse;
-import com.project.bff.application.dtos.responses.ViaCepServiceResponse;
-
 @Component
-public class ViaCepServiceResponseMapping {
+public class ViaCepClientResponseMapping {
 
-    public CepServiceResponse convertToCepServiceResponse(ViaCepServiceResponse response) {
+    public CepServiceResponse convertToCepServiceResponse(ViaCepClientResponse response) {
+
         return new CepServiceResponse(response.getCep(),
                 response.getLogradouro(),
                 response.getComplemento(),
