@@ -1,6 +1,6 @@
 package com.project.bff.application.dtos.wrappers;
 
-import com.project.bff.shared.ultils.MsgUltil;
+import com.project.bff.shared.ultils.MsgUtil;
 
 public abstract class Response {
 
@@ -17,8 +17,8 @@ public abstract class Response {
 
         this.succeeded = succeeded;
 
-        this.message = succeeded ? MsgUltil.RESPONSE_SUCCEEDED_MESSAGE()[1]
-                : MsgUltil.RESPONSE_FAILED_PROCESS_REQUEST()[1];
+        this.message = succeeded ? MsgUtil.RESPONSE_SUCCEEDED_MESSAGE()[1]
+                : MsgUtil.RESPONSE_FAILED_PROCESS_REQUEST()[1];
     }
 
     public boolean isSucceeded() {

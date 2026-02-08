@@ -45,19 +45,14 @@ public class AddressController {
     @GetMapping("")
     @Operation(summary = "Get address by cep")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully Processed", content = {
-                    @Content(mediaType = "application/json", schema = @Schema(implementation = GetAddressResponse.class)) }),
-            @ApiResponse(responseCode = "400", description = "Bad Request", content = {
-                    @Content(mediaType = "application/json", schema = @Schema(implementation = NotificationMessagesResponse.class)) }),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = {
-                    @Content(mediaType = "application/json", schema = @Schema(implementation = NotificationMessagesResponse.class)) }),
-            @ApiResponse(responseCode = "404", description = "Not Found", content = {
-                    @Content(mediaType = "application/json", schema = @Schema(implementation = NotificationMessagesResponse.class)) })
+            @ApiResponse(responseCode = "200", description = "Successfully Processed", content = { @Content(mediaType = "application/json", schema = @Schema(implementation = GetAddressResponse.class)) }),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = { @Content(mediaType = "application/json", schema = @Schema(implementation = NotificationMessagesResponse.class)) }),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = { @Content(mediaType = "application/json", schema = @Schema(implementation = NotificationMessagesResponse.class)) }),
+            @ApiResponse(responseCode = "404", description = "Not Found", content = { @Content(mediaType = "application/json", schema = @Schema(implementation = NotificationMessagesResponse.class)) })
     })
     public ResponseEntity<?> get(@RequestParam(name = "cep") String cep) {
 
-        logger.info(String.format("Start controller %s > method get.",
-                AddressController.class.getSimpleName()));
+        logger.info("Start controller {} > method get.", AddressController.class.getSimpleName());
 
         var useCaseResponse = getAddressUseCase.runAsync(cep).join();
 
@@ -69,8 +64,7 @@ public class AddressController {
 
         var response = getAddressUseCaseResponseMapping.convertToAddressModel(useCaseResponse);
 
-        logger.info(String.format("Finishes successfully controller %s > method get.",
-                AddressController.class.getSimpleName()));
+        logger.info("Finishes successfully controller {} > method get.", AddressController.class.getSimpleName());
 
         return ResponseEntity.ok(new GetAddressResponse(response));
     }

@@ -2,7 +2,7 @@ package com.project.bff.shared.ultils;
 
 import org.springframework.lang.Nullable;
 
-public class MsgUltil {
+public class MsgUtil {
 
     // COD0001
     public static String[] INTERNAL_SERVER_ERROR() {
@@ -67,5 +67,10 @@ public class MsgUltil {
     // COD0013
     public static String[] FAILED_TO_INTEGRATE_WITH_X0(@Nullable String param0) {
         return new String[] { "COD0013", String.format("Failed to integrate with %s.", param0) };
+    }
+
+    // COD0014
+    public static String[] SERVICE_FAILURE_X0(@Nullable String param0) {
+        return new String[] { "COD0014", String.format("Service failure %s.", param0) };
     }
 }

@@ -1,6 +1,7 @@
 package com.project.bff.application.useCases;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
 import org.slf4j.Logger;
@@ -16,7 +17,7 @@ import com.project.bff.application.interfaces.useCases.IGetAddressUseCase;
 import com.project.bff.application.mappings.CepServiceResponseMapping;
 import com.project.bff.domain.entities.AddressAudit;
 import com.project.bff.shared.notifications.abstractions.Notifiable;
-import com.project.bff.shared.ultils.MsgUltil;
+import com.project.bff.shared.ultils.MsgUtil;
 
 @Service
 @RequestScope
@@ -46,13 +47,12 @@ public class GetAddressUseCase extends Notifiable implements IGetAddressUseCase 
     @Override
     public CompletableFuture<GetAddressUseCaseResponse> runAsync(String request) {
 
-        logger.info(String.format("Start useCase %s > method runAsync.",
-                GetAddressUseCase.class.getSimpleName()));
+        logger.info("Start useCase {} > method runAsync.", GetAddressUseCase.class.getSimpleName());
 
         // Sanitize
         request = sanitize(request);
 
-        // Validade
+        // Validate
         validate(request);
 
         if (hasErrorNotification())
@@ -69,30 +69,26 @@ public class GetAddressUseCase extends Notifiable implements IGetAddressUseCase 
         // Response
         var useCaseResponse = cepServiceResponseMapping.convertToGetAddressUseCaseResponse(cepServiceResponse);
 
-        logger.info(String.format("Finishes successfully useCase  %s > method runAsync.",
-                GetAddressUseCase.class.getSimpleName()));
+        logger.info("Finishes successfully useCase  {} > method runAsync.", GetAddressUseCase.class.getSimpleName());
 
         return CompletableFuture.completedFuture(useCaseResponse);
     }
 
     private String sanitize(String cep) {
 
-        return cep != null ? cep.replaceAll("[^0-9]", "") : cep;
+        return cep != null ? cep.replaceAll("[^0-9]", "") : null;
     }
 
     private void validate(String cep) {
 
         if (cep == null || cep.trim().isEmpty()) {
-
-            addErrorNotification(MsgUltil.X0_IS_REQUIRED(null)[0], MsgUltil.X0_IS_REQUIRED("Cep")[1]);
+            addErrorNotification(MsgUtil.X0_IS_REQUIRED(null)[0], MsgUtil.X0_IS_REQUIRED("Cep")[1]);
         } else {
 
-            int numberOfCharacters = Integer.valueOf(env.getProperty("cep.numberOfCharacters"));
+            int numberOfCharacters = Integer.parseInt(Objects.requireNonNull(env.getProperty("cep.numberOfCharacters")));
 
             if (cep.length() != numberOfCharacters) {
-
-                addErrorNotification(MsgUltil.X0_MUST_CONTAIN_X1_CHARACTERS(null, null)[0],
-                        MsgUltil.X0_MUST_CONTAIN_X1_CHARACTERS("Cep", String.valueOf(numberOfCharacters))[1]);
+                addErrorNotification(MsgUtil.X0_MUST_CONTAIN_X1_CHARACTERS(null, null)[0], MsgUtil.X0_MUST_CONTAIN_X1_CHARACTERS("Cep", String.valueOf(numberOfCharacters))[1]);
             }
         }
     }

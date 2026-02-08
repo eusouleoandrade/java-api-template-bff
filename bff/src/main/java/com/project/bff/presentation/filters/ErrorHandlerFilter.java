@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.bff.application.dtos.responses.NotificationMessagesResponse;
 import com.project.bff.application.exceptions.AppException;
 import com.project.bff.shared.notifications.models.NotificationMessage;
-import com.project.bff.shared.ultils.MsgUltil;
+import com.project.bff.shared.ultils.MsgUtil;
 
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
@@ -49,8 +49,8 @@ public class ErrorHandlerFilter implements Filter {
             } else {
 
                 httpResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                exceptionNotifications.add(new NotificationMessage(MsgUltil.INTERNAL_SERVER_ERROR()[0],
-                        MsgUltil.INTERNAL_SERVER_ERROR()[1]));
+                exceptionNotifications.add(new NotificationMessage(MsgUtil.INTERNAL_SERVER_ERROR()[0],
+                        MsgUtil.INTERNAL_SERVER_ERROR()[1]));
             }
 
             var errorResponse = new NotificationMessagesResponse(exceptionNotifications);

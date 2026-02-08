@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.project.bff.shared.notifications.models.NotificationMessage;
-import com.project.bff.shared.ultils.MsgUltil;
+import com.project.bff.shared.ultils.MsgUtil;
 
 @SpringBootTest
 public class NotificationMessagesResponseTest {
@@ -39,7 +39,7 @@ public class NotificationMessagesResponseTest {
         assertThat(response.getErrors()).isEqualTo(errors);
         assertThat(response.getErrors()).containsExactly(error1, error2);
 
-        assertThat(response.getMessage()).isEqualTo(MsgUltil.RESPONSE_FAILED_PROCESS_REQUEST()[1]);
+        assertThat(response.getMessage()).isEqualTo(MsgUtil.RESPONSE_FAILED_PROCESS_REQUEST()[1]);
     }
 
     @DisplayName("Test Set Errors")
@@ -69,6 +69,6 @@ public class NotificationMessagesResponseTest {
         assertThat(response.getErrors()).isEqualTo(errors);
         assertThat(response.getErrors()).containsExactly(error1, error2);
 
-        assertThat(response.getMessage()).isEqualTo(MsgUltil.RESPONSE_FAILED_PROCESS_REQUEST()[1]);
+        assertThat(response.getMessage()).isEqualTo(MsgUtil.RESPONSE_FAILED_PROCESS_REQUEST()[1]);
     }
 }

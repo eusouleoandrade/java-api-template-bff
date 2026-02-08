@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.project.bff.application.exceptions.AppException;
 import com.project.bff.application.interfaces.repositories.IAddressAuditRepositoryAsync;
 import com.project.bff.domain.entities.AddressAudit;
-import com.project.bff.shared.ultils.MsgUltil;
+import com.project.bff.shared.ultils.MsgUtil;
 
 @Repository
 public class AddressAuditRepositoryAsync implements IAddressAuditRepositoryAsync {
@@ -28,8 +28,7 @@ public class AddressAuditRepositoryAsync implements IAddressAuditRepositoryAsync
     @Override
     public CompletableFuture<Void> createAsync(AddressAudit entity) {
 
-        logger.info(String.format("Start repository %s > method createAsync.",
-                AddressAuditRepositoryAsync.class.getSimpleName()));
+        logger.info("Start repository {} > method createAsync.", AddressAuditRepositoryAsync.class.getSimpleName());
 
         String query = "INSERT INTO bffdb.addressAudit (cep, dataHora) VALUES (:cep, :dataHora)";
 
@@ -43,27 +42,24 @@ public class AddressAuditRepositoryAsync implements IAddressAuditRepositoryAsync
 
             if (affectedLines > 0) {
 
-                logger.info(String.format("Audit insertion completed successfully. Repository %s > method createAsync.",
-                        AddressAuditRepositoryAsync.class.getSimpleName()));
+                logger.info("Audit insertion completed successfully. Repository {} > method createAsync.", AddressAuditRepositoryAsync.class.getSimpleName());
 
             } else {
 
-                logger.warn(String.format("Failed to insert. Zero rows affected. Repository %s > method createAsync.",
-                        AddressAuditRepositoryAsync.class.getSimpleName()));
+                logger.warn("Failed to insert. Zero rows affected. Repository {} > method createAsync.", AddressAuditRepositoryAsync.class.getSimpleName());
             }
 
             return CompletableFuture.completedFuture(null);
 
         } catch (Exception ex) {
 
-            logger.error(MsgUltil.DATA_BASE_SERVER_ERROR()[1] + " - Error: " + ex.getMessage(), ex);
+            logger.error("{} - Error: {}", MsgUtil.DATA_BASE_SERVER_ERROR()[1], ex.getMessage(), ex);
 
-            throw new AppException(MsgUltil.DATA_BASE_SERVER_ERROR()[0], MsgUltil.DATA_BASE_SERVER_ERROR()[1], ex);
+            throw new AppException(MsgUtil.DATA_BASE_SERVER_ERROR()[0], MsgUtil.DATA_BASE_SERVER_ERROR()[1], ex);
 
         } finally {
 
-            logger.info(String.format("Finishes repository %s > method createAsync.",
-                    AddressAuditRepositoryAsync.class.getSimpleName()));
+            logger.info("Finishes repository {} > method createAsync.", AddressAuditRepositoryAsync.class.getSimpleName());
         }
     }
 }
