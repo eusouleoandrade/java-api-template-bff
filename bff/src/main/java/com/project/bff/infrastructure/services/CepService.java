@@ -7,7 +7,7 @@ import com.project.bff.application.interfaces.clients.IViaCepClient;
 import com.project.bff.application.interfaces.services.ICepService;
 import com.project.bff.application.mappings.BrasilApiCepClientResponseMapping;
 import com.project.bff.application.mappings.ViaCepClientResponseMapping;
-import com.project.bff.shared.ultils.MsgUtil;
+import com.project.bff.shared.utils.MsgUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -70,7 +70,7 @@ public class CepService implements ICepService {
 
             } catch (Exception exBrasil) {
                 logger.error("{} - Error: {}", MsgUtil.SERVICE_FAILURE_X0("BrasilCep API")[1], exBrasil.getMessage(), exBrasil);
-                throw new AppException(MsgUtil.SERVICE_FAILURE_X0("BrasilCep API")[0], MsgUtil.SERVICE_FAILURE_X0("BrasilCepss API")[1], exBrasil);
+                throw new AppException(MsgUtil.SERVICE_FAILURE_X0("BrasilCep API")[0], MsgUtil.SERVICE_FAILURE_X0("BrasilCep API")[1], exBrasil);
             }
 
         } finally {

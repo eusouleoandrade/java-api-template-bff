@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.project.bff.application.exceptions.AppException;
 import com.project.bff.application.interfaces.repositories.IAddressAuditRepositoryAsync;
 import com.project.bff.domain.entities.AddressAudit;
-import com.project.bff.shared.ultils.MsgUtil;
+import com.project.bff.shared.utils.MsgUtil;
 
 @Repository
 public class AddressAuditRepositoryAsync implements IAddressAuditRepositoryAsync {

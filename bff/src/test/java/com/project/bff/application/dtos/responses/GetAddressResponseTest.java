@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.project.bff.application.dtos.models.AddressModel;
-import com.project.bff.shared.ultils.MsgUtil;
+import com.project.bff.shared.utils.MsgUtil;
 
 @SpringBootTest
 public class GetAddressResponseTest {

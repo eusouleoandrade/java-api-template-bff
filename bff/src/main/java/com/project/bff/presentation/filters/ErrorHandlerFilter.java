@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.bff.application.dtos.responses.NotificationMessagesResponse;
 import com.project.bff.application.exceptions.AppException;
 import com.project.bff.shared.notifications.models.NotificationMessage;
-import com.project.bff.shared.ultils.MsgUtil;
+import com.project.bff.shared.utils.MsgUtil;
 
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;

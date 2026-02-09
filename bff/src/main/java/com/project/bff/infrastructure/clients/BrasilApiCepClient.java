@@ -3,7 +3,7 @@ package com.project.bff.infrastructure.clients;
 import com.project.bff.application.dtos.responses.BrasilApiCepClientResponse;
 import com.project.bff.application.exceptions.AppException;
 import com.project.bff.application.interfaces.clients.IBrasilApiCepClient;
-import com.project.bff.shared.ultils.MsgUtil;
+import com.project.bff.shared.utils.MsgUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.env.Environment;
