@@ -123,7 +123,7 @@ public class GetAddressUseCaseTest {
     })
     public void testRunAsyncFailureWithInvalidCep(String cep) {
 
-        // Arranje
+        // Arrange
         useCase = new GetAddressUseCase(addressAuditRepositoryAsync, cepService, cepServiceResponseMapping,
                 env);
 
