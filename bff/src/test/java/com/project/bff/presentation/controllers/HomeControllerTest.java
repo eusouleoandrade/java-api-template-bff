@@ -15,7 +15,7 @@ public class HomeControllerTest {
     @Test
     public void testGetSuccess() {
 
-        // Arranje
+        // Arrange
         controller = new HomeController();
 
         // Act

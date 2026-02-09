@@ -64,7 +64,7 @@ public class AddressControllerTest {
             String ddd,
             String siafi) {
 
-        // Arranje
+        // Arrange
         GetAddressUseCaseResponse usecCaseResponse = new GetAddressUseCaseResponse(outputCep, logradouro, complemento,
                 bairro, localidade, uf, ibge, gia, ddd, siafi);
 
@@ -101,7 +101,7 @@ public class AddressControllerTest {
     @Test
     public void testGetFailureWithHasErrorNotification() {
 
-        // Arranje
+        // Arrange
         String cep = "12345678";
 
         when(getAddressUseCase.runAsync(anyString())).thenReturn(CompletableFuture.completedFuture(null));
