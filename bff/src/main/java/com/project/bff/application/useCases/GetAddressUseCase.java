@@ -17,7 +17,7 @@ import com.project.bff.application.interfaces.useCases.IGetAddressUseCase;
 import com.project.bff.application.mappings.CepServiceResponseMapping;
 import com.project.bff.domain.entities.AddressAudit;
 import com.project.bff.shared.notifications.abstractions.Notifiable;
-import com.project.bff.shared.ultils.MsgUtil;
+import com.project.bff.shared.utils.MsgUtil;
 
 @Service
 @RequestScope

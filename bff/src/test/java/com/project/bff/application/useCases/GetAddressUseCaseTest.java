@@ -23,7 +23,7 @@ import com.project.bff.application.interfaces.repositories.IAddressAuditReposito
 import com.project.bff.application.interfaces.services.ICepService;
 import com.project.bff.application.mappings.CepServiceResponseMapping;
 import com.project.bff.domain.entities.AddressAudit;
-import com.project.bff.shared.ultils.MsgUtil;
+import com.project.bff.shared.utils.MsgUtil;
 
 import nl.altindag.log.LogCaptor;
 
@@ -175,10 +175,8 @@ public class GetAddressUseCaseTest {
             assertThat(useCase.getErrorNotifications()).isNotEmpty();
             assertThat(useCase.getErrorNotifications()).hasSize(1);
 
-            assertThat(useCase.getErrorNotifications().get(0).getKey())
-                    .isEqualTo(MsgUtil.X0_IS_REQUIRED(null)[0]);
-            assertThat(useCase.getErrorNotifications().get(0).getMessage())
-                    .isEqualTo(MsgUtil.X0_IS_REQUIRED("Cep")[1]);
+            assertThat(useCase.getErrorNotifications().get(0).getKey()).isEqualTo(MsgUtil.X0_IS_REQUIRED(null)[0]);
+            assertThat(useCase.getErrorNotifications().get(0).getMessage()).isEqualTo(MsgUtil.X0_IS_REQUIRED("Cep")[1]);
 
             assertThat(logCaptor.getInfoLogs())
                     .containsExactly("Start useCase GetAddressUseCase > method runAsync.")

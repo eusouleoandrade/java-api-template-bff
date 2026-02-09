@@ -1,4 +1,4 @@
-package com.project.bff.shared.ultils;
+package com.project.bff.shared.utils;
 
 import org.springframework.lang.Nullable;
 

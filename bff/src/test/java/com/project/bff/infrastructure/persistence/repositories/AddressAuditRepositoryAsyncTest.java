@@ -19,7 +19,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import com.project.bff.application.exceptions.AppException;
 import com.project.bff.domain.entities.AddressAudit;
-import com.project.bff.shared.ultils.MsgUtil;
+import com.project.bff.shared.utils.MsgUtil;
 
 import nl.altindag.log.LogCaptor;
 

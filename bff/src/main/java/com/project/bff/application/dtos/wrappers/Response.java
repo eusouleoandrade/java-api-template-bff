@@ -1,6 +1,6 @@
 package com.project.bff.application.dtos.wrappers;
 
-import com.project.bff.shared.ultils.MsgUtil;
+import com.project.bff.shared.utils.MsgUtil;
 
 public abstract class Response {
 

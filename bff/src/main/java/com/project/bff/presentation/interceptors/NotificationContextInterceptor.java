@@ -14,7 +14,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.bff.application.dtos.responses.NotificationMessagesResponse;
 import com.project.bff.shared.notifications.contexts.NotificationContext;
-import com.project.bff.shared.ultils.MsgUtil;
+import com.project.bff.shared.utils.MsgUtil;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

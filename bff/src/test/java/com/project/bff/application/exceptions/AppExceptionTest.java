@@ -97,4 +97,37 @@ public class AppExceptionTest {
         // Assert
         assertThat(resultCode).isEqualTo(code);
     }
+
+    @DisplayName("Test code, message and cause constructor stores all fields")
+    @Test
+    public void testCodeMessageAndCauseConstructorStoresAllFields() {
+
+        // Arrange
+        String code = "ERR_CODE";
+        String message = "Test message";
+        Throwable cause = new Throwable("Cause message");
+
+        // Act
+        AppException exception = new AppException(code, message, cause);
+
+        // Assert
+        assertThat(exception.getCode()).isEqualTo(code);
+        assertThat(exception.getMessage()).isEqualTo(message);
+        assertThat(exception.getCause()).isEqualTo(cause);
+    }
+
+    @DisplayName("Test message formatting with null arg")
+    @Test
+    public void testMessageFormattingWithNullArg() {
+
+        // Arrange
+        String message = "Test with {0}";
+
+        // Act
+        AppException exception = new AppException(message, (Object) null);
+
+        // Assert
+        assertThat(exception.getMessage()).isEqualTo("Test with null");
+        assertNull(exception.getCode());
+    }
 }
