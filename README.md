@@ -57,6 +57,20 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
 ```
 
+Executando MySQL via Docker
+
+Para subir um container MySQL localmente (porta 3306) com volume persistente, usar:
+
+```bash
+docker run --name mysql -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=pwdmysql -v mysql:/var/lib/mysql mysql:8.0.34
+```
+
+- `--name mysql`: nome do container
+- `-p 3306:3306`: mapeia a porta para acesso local
+- `-e MYSQL_ROOT_PASSWORD=pwdmysql`: define senha do usuário root (evite usar senhas em texto em produção)
+- `-v mysql:/var/lib/mysql`: volume Docker para persistência dos dados
+- imagem usada: `mysql:8.0.34`
+
 Observação: este BFF pode atuar sem persistência própria dependendo do caso — ajuste conforme necessidade.
 
 ---
