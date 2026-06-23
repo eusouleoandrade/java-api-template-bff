@@ -1,50 +1,52 @@
 # java-api-template-bff
 
-Template de API Backend-for-Frontend (BFF) em Java usando Spring Boot. Este repositório fornece uma base organizada segundo princípios de Clean Architecture para acelerar o desenvolvimento de APIs BFF.
+Template de API Backend-for-Frontend (BFF) em Java com Spring Boot — base organizada segundo princípios de Clean Architecture. Projeto voltado para compor um BFF leve que integra serviços (ex.: consulta de endereço por CEP).
 
 ---
 
-## 🚀 Tecnologias
+## 🚀 Tecnologias detectadas
 
-- Java 21+
-- Spring Boot 3.5.x
-- Spring JDBC
-- SpringDoc OpenAPI (Swagger)
-- Jackson
-- Logback
-- Maven (com wrapper)
+- Java: 25
+- Spring Boot (parent): 3.5.15
+- Spring Web (spring-boot-starter-web)
+- Spring JDBC (spring-boot-starter-jdbc)
+- MySQL Connector: 9.2.0
+- SpringDoc OpenAPI (springdoc-openapi-starter-webmvc-ui): 2.5.0
+- Logback (logback-classic)
+- JaCoCo: 0.8.15
+- LogCaptor (teste): 2.9.3
+- Maven (wrapper incluso)
 
 ---
 
 ## 🏗️ Arquitetura
 
-O projeto segue uma arquitetura em camadas (inspirada em Clean Architecture):
+Segregação por camadas (inspirada em Clean Architecture):
 
-- presentation/ — Controllers e filtros (API layer)
-- application/ — Casos de uso, DTOs e regras de negócio
+- presentation/ — Controllers, filtros e interceptors (API layer)
+- application/ — Casos de uso, DTOs, mappers e regras de negócio
 - domain/ — Entidades de domínio
 - infrastructure/ — Persistência e integrações externas
-- shared/ — Componentes reutilizáveis (notificações, utils)
+- shared/ — Componentes reutilizáveis (notification pattern, utilitários)
+
+A aplicação utiliza Notification Pattern para acumular mensagens de domínio sem lançar exceções de negócio.
 
 ---
 
-## 📡 Endpoints (exemplo)
+## 📡 Endpoints principais (detectados)
 
-Base URL local: `http://localhost:8080/api/v1`
+Base URL: http://localhost:8080
 
-- `GET /api/v1/health` — Status da aplicação
-- `GET /api/v1/resource` — Lista de recursos
-- `POST /api/v1/resource` — Cria novo recurso
-- `PUT /api/v1/resource/{id}` — Atualiza recurso
-- `DELETE /api/v1/resource/{id}` — Remove recurso
+- GET /api/v1/address?cep={cep} — Busca endereço por CEP (200 / 400 / 404 / 500)
+- GET / -> redireciona para Swagger UI
 
-> Ajustar rotas reais conforme implementação do módulo.
+A lista completa de endpoints depende dos controllers implementados.
 
 ---
 
 ## 🗄️ Banco de Dados
 
-Este template suporta acesso a banco relacional via Spring JDBC. Exemplos de configuração (`application.yml`):
+Acesso via Spring JDBC. Dependência MySQL presente (mysql-connector-j). Exemplo de configuração (application.yml):
 
 ```yaml
 spring:
@@ -55,20 +57,21 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
 ```
 
-A estrutura de tabelas depende dos módulos implementados no projeto.
+Observação: este BFF pode atuar sem persistência própria dependendo do caso — ajuste conforme necessidade.
 
 ---
 
 ## ⚙️ Como executar
 
 Pré-requisitos:
-- Java 21+
-- Maven 3.8+
+- Java 21+ (pom declara 25)
+- Maven 3.8+ (usar wrapper incluso)
 
-Executando localmente:
+Executando localmente (módulo bff):
 
 ```bash
-# Na raiz do repositório
+# na raiz do repositório
+cd bff
 ./mvnw clean package
 ./mvnw spring-boot:run
 ```
@@ -81,38 +84,40 @@ A aplicação inicia na porta 8080 por padrão.
 
 Com a aplicação em execução, acessar:
 
-```
-http://localhost:8080/swagger-ui/index.html
-```
+- http://localhost:8080/swagger-ui/index.html
+- ou http://localhost:8080/swagger-ui.html
+
+(O HomeController redireciona para a UI do Swagger.)
 
 ---
 
 ## 🧪 Testes
 
-Executar testes com Maven:
+Executar suíte de testes com Maven:
 
 ```bash
 ./mvnw test
 ```
 
+JaCoCo configurado no pom.xml para geração de relatório de cobertura.
+
 ---
 
 ## 🔄 CI/CD
 
-Adicionar workflows no diretório `.github/workflows/` para CI (build, testes, cobertura). Este template não pressupõe um pipeline específico — adapte conforme sua organização.
+Adicionar workflows em `.github/workflows/` para CI (build, testes, relatório de cobertura). Recomenda-se pipeline: build → test → jacoco report.
 
 ---
 
-## 📌 Boas práticas
+## 📌 Observações importantes
 
-- Separar regras de negócio da camada de apresentação
-- Usar DTOs para comunicação entre camadas
-- Centralizar tratamento de erros e padrões de resposta
-- Incluir monitoramento (Actuator) e correlação de logs (correlationId)
+- Centralizar variáveis sensíveis (senha DB, URLs) em variáveis de ambiente ou secret manager.
+- Manter DTOs entre camadas para evitar vazamento de modelos de domínio.
+- Validar e padronizar respostas de erro usando Notification Pattern e filtros.
 
 ---
 
 ## Licença
 
-Licença padrão do projeto (adapte conforme necessidade).
+Ajustar conforme política do projeto.
 
