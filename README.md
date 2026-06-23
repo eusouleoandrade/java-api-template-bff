@@ -71,6 +71,47 @@ docker run --name mysql -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=pwdmysql -v mysql
 - `-v mysql:/var/lib/mysql`: volume Docker para persistência dos dados
 - imagem usada: `mysql:8.0.34`
 
+Acessando o banco via MySQL Workbench
+
+1. Abra o MySQL Workbench e crie uma nova conexão (Connection Name: `mysql-local`, Method: Standard TCP/IP, Hostname: `127.0.0.1`, Port: `3306`, Username: `root`, Password: `pwdmysql`). Teste a conexão.
+2. Crie o schema usado pela aplicação executando na aba SQL:
+
+```sql
+CREATE DATABASE IF NOT EXISTS bffdb;
+USE bffdb;
+```
+
+3. Para criar a tabela de auditoria de endereços, execute o conteúdo do script localizado em:
+
+`bff/src/main/java/com/project/bff/infrastructure/persistence/scripts/AddressAudit.sql`
+
+Conteúdo do script (para copiar/colar na janela SQL do Workbench):
+
+```sql
+USE bffdb;
+
+CREATE TABLE addressAudit (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    cep VARCHAR(8) NOT NULL,
+    dataHora DATETIME NOT NULL,
+    PRIMARY KEY (id)
+);
+```
+
+Alternativa (linha de comando):
+
+```bash
+# criar database
+docker exec -i mysql mysql -uroot -ppwdmysql -e "CREATE DATABASE IF NOT EXISTS bffdb;"
+# executar script a partir do host (ajuste o caminho para o arquivo)
+docker cp bff/src/main/java/com/project/bff/infrastructure/persistence/scripts/AddressAudit.sql mysql:/tmp/AddressAudit.sql
+docker exec -i mysql mysql -uroot -ppwdmysql bffdb < /tmp/AddressAudit.sql
+```
+
+Observações:
+- Use `127.0.0.1` ou `localhost` quando o container expõe a porta localmente. Se estiver usando Docker remoto, ajuste o hostname.
+- Em produção, use secrets/variáveis de ambiente em vez de senhas em texto.
+
 Observação: este BFF pode atuar sem persistência própria dependendo do caso — ajuste conforme necessidade.
 
 ---
