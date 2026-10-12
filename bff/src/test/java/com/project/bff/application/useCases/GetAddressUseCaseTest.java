@@ -115,6 +115,39 @@ public class GetAddressUseCaseTest {
                         "Finishes successfully useCase  GetAddressUseCase > method runAsync.");
     }
 
+    @DisplayName("Returns address when audit fails")
+    @Test
+    public void testRunAsyncReturnsAddressWhenAuditFails() {
+
+        // Arrange
+        String cep = "12345678";
+        CepServiceResponse cepServiceResponse = new CepServiceResponse(cep, "Rua Exemplo", "", "Centro",
+                "Cidade Exemplo", "EX", "1234567", "98765", "11", "1234");
+        GetAddressUseCaseResponse expectedResponse = new GetAddressUseCaseResponse(cep, "Rua Exemplo", "",
+                "Centro", "Cidade Exemplo", "EX", "1234567", "98765", "11", "1234");
+
+        when(cepService.getAddressAsync(cep)).thenReturn(CompletableFuture.completedFuture(cepServiceResponse));
+        when(addressAuditRepositoryAsync.createAsync(any(AddressAudit.class)))
+                .thenReturn(CompletableFuture.failedFuture(new RuntimeException("Audit unavailable")));
+        when(cepServiceResponseMapping.convertToGetAddressUseCaseResponse(cepServiceResponse))
+                .thenReturn(expectedResponse);
+
+        useCase = new GetAddressUseCase(addressAuditRepositoryAsync, cepService, cepServiceResponseMapping, env);
+        logCaptor = LogCaptor.forClass(GetAddressUseCase.class);
+
+        // Act
+        var useCaseResponse = useCase.runAsync(cep).join();
+
+        // Assert
+        assertThat(useCaseResponse).isEqualTo(expectedResponse);
+        assertThat(useCase.hasErrorNotification()).isFalse();
+        assertThat(logCaptor.getWarnLogs())
+                .contains("Address audit failed. The address response will still be returned.");
+
+        verify(cepServiceResponseMapping, times(1))
+                .convertToGetAddressUseCaseResponse(cepServiceResponse);
+    }
+
     @DisplayName("Test RunAsync failure with invalid cep")
     @ParameterizedTest
     @CsvSource({
