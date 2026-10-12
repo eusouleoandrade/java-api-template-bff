@@ -22,6 +22,8 @@ public class AddressModel {
 
     private String siafi;
 
+    private String provedor;
+
     public AddressModel(String cep,
             String logradouro,
             String complemento,
@@ -31,7 +33,8 @@ public class AddressModel {
             String ibge,
             String gia,
             String ddd,
-            String siafi) {
+            String siafi,
+            String provedor) {
 
         this.cep = cep;
         this.logradouro = logradouro;
@@ -43,6 +46,7 @@ public class AddressModel {
         this.gia = gia;
         this.ddd = ddd;
         this.siafi = siafi;
+        this.provedor = provedor;
     }
 
     public String getCep() {
@@ -83,5 +87,9 @@ public class AddressModel {
 
     public String getSiafi() {
         return siafi;
+    }
+
+    public String getProvedor() {
+        return provedor;
     }
 }

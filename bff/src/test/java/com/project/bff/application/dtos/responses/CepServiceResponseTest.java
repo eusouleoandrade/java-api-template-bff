@@ -13,8 +13,8 @@ public class CepServiceResponseTest {
     @DisplayName("Test CepServiceResponse Constructor and Getters")
     @ParameterizedTest
     @CsvSource({
-            "12345-678, Rua Exemplo 1, Apto 101, Centro, Cidade Exemplo 1, EX, 1234567, 98765, 11, 1234",
-            "56789-012, Rua Exemplo 2, Apto 102, Centro, Cidade Exemplo 2, AX, 5678901, 54321, 11, 5678"
+            "12345-678, Rua Exemplo 1, Apto 101, Centro, Cidade Exemplo 1, EX, 1234567, 98765, 11, 1234, ViaCep",
+            "56789-012, Rua Exemplo 2, Apto 102, Centro, Cidade Exemplo 2, AX, 5678901, 54321, 11, 5678, BrasilApiCep"
     })
     public void testCepServiceResponseConstructorAndGetters(String cep,
             String logradouro,
@@ -25,14 +25,15 @@ public class CepServiceResponseTest {
             String ibge,
             String gia,
             String ddd,
-            String siafi) {
+            String siafi,
+            String provedor) {
 
         // Arrange
         CepServiceResponse cepServiceResponse;
 
         // Act
         cepServiceResponse = new CepServiceResponse(cep, logradouro, complemento, bairro, localidade, uf, ibge, gia,
-                ddd, siafi);
+                ddd, siafi, provedor);
 
         // Assert
         assertThat(cepServiceResponse).isNotNull();
@@ -46,5 +47,6 @@ public class CepServiceResponseTest {
         assertThat(cepServiceResponse.getGia()).isEqualTo(gia);
         assertThat(cepServiceResponse.getDdd()).isEqualTo(ddd);
         assertThat(cepServiceResponse.getSiafi()).isEqualTo(siafi);
+        assertThat(cepServiceResponse.getProvedor()).isEqualTo(provedor);
     }
 }

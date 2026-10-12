@@ -13,8 +13,8 @@ public class GetAddressUseCaseResponseTest {
     @DisplayName("Test GetAddressUseCaseResponse Constructor and Getters")
     @ParameterizedTest
     @CsvSource({
-            "12345-678, Rua Exemplo 1, Apto 101, Centro, Cidade Exemplo 1, EX, 1234567, 98765, 11, 1234",
-            "56789-012, Rua Exemplo 2, Apto 102, Centro, Cidade Exemplo 2, AX, 5678901, 54321, 11, 5678"
+            "12345-678, Rua Exemplo 1, Apto 101, Centro, Cidade Exemplo 1, EX, 1234567, 98765, 11, 1234, ViaCep",
+            "56789-012, Rua Exemplo 2, Apto 102, Centro, Cidade Exemplo 2, AX, 5678901, 54321, 11, 5678, BrasilApiCep"
     })
     public void testGetAddressUseCaseResponseConstructorAndGetters(String cep,
             String logradouro,
@@ -25,14 +25,15 @@ public class GetAddressUseCaseResponseTest {
             String ibge,
             String gia,
             String ddd,
-            String siafi) {
+            String siafi,
+            String provedor) {
 
         // Arrange
         GetAddressUseCaseResponse response;
 
         // Act
         response = new GetAddressUseCaseResponse(cep, logradouro, complemento, bairro, localidade, uf, ibge, gia, ddd,
-                siafi);
+                siafi, provedor);
 
         // Assert
         assertThat(response).isNotNull();
@@ -46,5 +47,6 @@ public class GetAddressUseCaseResponseTest {
         assertThat(response.getGia()).isEqualTo(gia);
         assertThat(response.getDdd()).isEqualTo(ddd);
         assertThat(response.getSiafi()).isEqualTo(siafi);
+        assertThat(response.getProvedor()).isEqualTo(provedor);
     }
 }

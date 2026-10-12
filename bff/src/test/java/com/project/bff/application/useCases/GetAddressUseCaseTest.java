@@ -73,11 +73,11 @@ public class GetAddressUseCaseTest {
         // Arrange
         CepServiceResponse cepServiceResponse = new CepServiceResponse(sanitizedCep, logradouro, complemento,
                 bairro,
-                localidade, uf, ibge, gia, ddd, siafi);
+                localidade, uf, ibge, gia, ddd, siafi, "ViaCep");
 
         GetAddressUseCaseResponse useCaseExpectedResponse = new GetAddressUseCaseResponse(sanitizedCep,
                 logradouro,
-                complemento, bairro, localidade, uf, ibge, gia, ddd, siafi);
+                complemento, bairro, localidade, uf, ibge, gia, ddd, siafi, "ViaCep");
 
         when(cepService.getAddressAsync(anyString()))
                 .thenReturn(CompletableFuture.completedFuture(cepServiceResponse));
@@ -122,9 +122,9 @@ public class GetAddressUseCaseTest {
         // Arrange
         String cep = "12345678";
         CepServiceResponse cepServiceResponse = new CepServiceResponse(cep, "Rua Exemplo", "", "Centro",
-                "Cidade Exemplo", "EX", "1234567", "98765", "11", "1234");
+                "Cidade Exemplo", "EX", "1234567", "98765", "11", "1234", "ViaCep");
         GetAddressUseCaseResponse expectedResponse = new GetAddressUseCaseResponse(cep, "Rua Exemplo", "",
-                "Centro", "Cidade Exemplo", "EX", "1234567", "98765", "11", "1234");
+                "Centro", "Cidade Exemplo", "EX", "1234567", "98765", "11", "1234", "ViaCep");
 
         when(cepService.getAddressAsync(cep)).thenReturn(CompletableFuture.completedFuture(cepServiceResponse));
         when(addressAuditRepositoryAsync.createAsync(any(AddressAudit.class)))

@@ -27,7 +27,8 @@ public class CepServiceResponseMappingTest {
                 "1234567",
                 "98765",
                 "11",
-                "1234");
+                "1234",
+                "ViaCep");
 
         CepServiceResponseMapping mapping = new CepServiceResponseMapping();
 
@@ -46,5 +47,6 @@ public class CepServiceResponseMappingTest {
         assertThat(response.getGia()).isEqualTo("98765");
         assertThat(response.getDdd()).isEqualTo("11");
         assertThat(response.getSiafi()).isEqualTo("1234");
+        assertThat(response.getProvedor()).isEqualTo("ViaCep");
     }
 }
