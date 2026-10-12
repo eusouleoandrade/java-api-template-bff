@@ -64,7 +64,11 @@ public class GetAddressUseCase extends Notifiable implements IGetAddressUseCase 
         // Audit
         var addressAudit = new AddressAudit(request, LocalDateTime.now());
 
-        addressAuditRepositoryAsync.createAsync(addressAudit).join();
+        try {
+            addressAuditRepositoryAsync.createAsync(addressAudit).join();
+        } catch (Exception ex) {
+            logger.warn("Address audit failed. The address response will still be returned.", ex);
+        }
 
         // Response
         var useCaseResponse = cepServiceResponseMapping.convertToGetAddressUseCaseResponse(cepServiceResponse);
