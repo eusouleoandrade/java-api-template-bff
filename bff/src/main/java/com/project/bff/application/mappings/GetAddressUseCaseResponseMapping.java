@@ -19,6 +19,7 @@ public class GetAddressUseCaseResponseMapping {
                 response.getIbge(),
                 response.getGia(),
                 response.getDdd(),
-                response.getSiafi());
+                response.getSiafi(),
+                response.getProvedor());
     }
 }

@@ -17,8 +17,8 @@ public class GetAddressResponseTest {
     @DisplayName("Test GetAddressResponse Constructor and Getters")
     @ParameterizedTest
     @CsvSource({
-            "12345-678, Rua Exemplo 1, Apto 101, Centro, Cidade Exemplo 1, EX, 1234567, 98765, 11, 1234",
-            "56789-012, Rua Exemplo 2, Apto 102, Centro, Cidade Exemplo 2, AX, 5678901, 54321, 11, 5678"
+            "12345-678, Rua Exemplo 1, Apto 101, Centro, Cidade Exemplo 1, EX, 1234567, 98765, 11, 1234, ViaCep",
+            "56789-012, Rua Exemplo 2, Apto 102, Centro, Cidade Exemplo 2, AX, 5678901, 54321, 11, 5678, BrasilApiCep"
     })
     public void testGetAddressResponseConstructorAndGetters(String cep,
             String logradouro,
@@ -29,11 +29,12 @@ public class GetAddressResponseTest {
             String ibge,
             String gia,
             String ddd,
-            String siafi) {
+            String siafi,
+            String provedor) {
 
         // Arrange
         AddressModel addressModel = new AddressModel(cep, logradouro, complemento, bairro, localidade, uf, ibge,
-                gia, ddd, siafi);
+                gia, ddd, siafi, provedor);
 
         // Act
         GetAddressResponse getAddressResponse = new GetAddressResponse(addressModel);
@@ -52,6 +53,7 @@ public class GetAddressResponseTest {
         assertThat(getAddressResponse.getAddressModel().getGia()).isEqualTo(gia);
         assertThat(getAddressResponse.getAddressModel().getDdd()).isEqualTo(ddd);
         assertThat(getAddressResponse.getAddressModel().getSiafi()).isEqualTo(siafi);
+        assertThat(getAddressResponse.getAddressModel().getProvedor()).isEqualTo(provedor);
 
         assertEquals(MsgUtil.RESPONSE_SUCCEEDED_MESSAGE()[1], getAddressResponse.getMessage());
     }

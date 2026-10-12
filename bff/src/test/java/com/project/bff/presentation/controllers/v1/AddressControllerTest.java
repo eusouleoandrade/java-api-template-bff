@@ -66,10 +66,10 @@ public class AddressControllerTest {
 
         // Arrange
         GetAddressUseCaseResponse usecCaseResponse = new GetAddressUseCaseResponse(outputCep, logradouro, complemento,
-                bairro, localidade, uf, ibge, gia, ddd, siafi);
+                bairro, localidade, uf, ibge, gia, ddd, siafi, "ViaCep");
 
         AddressModel addressModel = new AddressModel(outputCep, logradouro, complemento, bairro, localidade, uf, ibge,
-                gia, ddd, siafi);
+                gia, ddd, siafi, "ViaCep");
 
         when(getAddressUseCase.runAsync(anyString())).thenReturn(CompletableFuture.completedFuture(usecCaseResponse));
         when(mapping.convertToAddressModel(usecCaseResponse)).thenReturn(addressModel);

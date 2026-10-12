@@ -35,6 +35,7 @@ public class ViaCepClientResponseMappingTest {
         assertThat(result.getGia()).isEqualTo("98765");
         assertThat(result.getDdd()).isEqualTo("11");
         assertThat(result.getSiafi()).isEqualTo("1234");
+        assertThat(result.getProvedor()).isEqualTo("ViaCep");
     }
 
     @DisplayName("Test convertToCepServiceResponse handles null fields")
@@ -61,5 +62,6 @@ public class ViaCepClientResponseMappingTest {
         assertThat(result.getGia()).isNull();
         assertThat(result.getDdd()).isNull();
         assertThat(result.getSiafi()).isNull();
+        assertThat(result.getProvedor()).isEqualTo("ViaCep");
     }
 }

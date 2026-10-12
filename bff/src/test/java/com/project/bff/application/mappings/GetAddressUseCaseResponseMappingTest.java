@@ -27,7 +27,8 @@ public class GetAddressUseCaseResponseMappingTest {
                 "1234567",
                 "98765",
                 "11",
-                "1234");
+                "1234",
+                "ViaCep");
 
         GetAddressUseCaseResponseMapping mapping = new GetAddressUseCaseResponseMapping();
 
@@ -46,5 +47,6 @@ public class GetAddressUseCaseResponseMappingTest {
         assertThat(addressModel.getGia()).isEqualTo("98765");
         assertThat(addressModel.getDdd()).isEqualTo("11");
         assertThat(addressModel.getSiafi()).isEqualTo("1234");
+        assertThat(addressModel.getProvedor()).isEqualTo("ViaCep");
     }
 }

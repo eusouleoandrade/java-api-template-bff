@@ -36,7 +36,7 @@ public class CepServiceTest {
         );
 
         CepServiceResponse expected = new CepServiceResponse(
-                "01001-000","Rua","","Bairro","Cidade","SP","123","","11","1"
+                "01001-000","Rua","","Bairro","Cidade","SP","123","","11","1","ViaCep"
         );
 
         when(viaCepClient.getAddressAsync(cep)).thenReturn(CompletableFuture.completedFuture(viaDto));
@@ -72,7 +72,7 @@ public class CepServiceTest {
         brasilDto.setState("SP");
 
         CepServiceResponse expected = new CepServiceResponse(
-                "01001-000","RuaBrasil","","Bairro","Cidade","SP","123","","11","1"
+                "01001-000","RuaBrasil","","Bairro","Cidade","SP","123","","11","1","BrasilApiCep"
         );
 
         when(viaCepClient.getAddressAsync(cep)).thenReturn(CompletableFuture.completedFuture(viaDto));
@@ -107,7 +107,7 @@ public class CepServiceTest {
         brasilDto.setState("SP");
 
         CepServiceResponse expected = new CepServiceResponse(
-                "01001-000","RuaBrasil","","Bairro","Cidade","SP","123","","11","1"
+                "01001-000","RuaBrasil","","Bairro","Cidade","SP","123","","11","1","BrasilApiCep"
         );
 
         when(viaCepClient.getAddressAsync(cep)).thenReturn(CompletableFuture.failedFuture(new RuntimeException("Via down")));
@@ -201,4 +201,3 @@ public class CepServiceTest {
                 });
     }
 }
-

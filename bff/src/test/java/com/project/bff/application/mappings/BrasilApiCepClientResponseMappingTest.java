@@ -38,6 +38,7 @@ public class BrasilApiCepClientResponseMappingTest {
         assertThat(result.getGia()).isEqualTo("");
         assertThat(result.getDdd()).isEqualTo("");
         assertThat(result.getSiafi()).isEqualTo("");
+        assertThat(result.getProvedor()).isEqualTo("BrasilApiCep");
     }
 
     @DisplayName("Test convertToCepServiceResponse handles null fields")
@@ -68,5 +69,6 @@ public class BrasilApiCepClientResponseMappingTest {
         assertThat(result.getGia()).isEqualTo("");
         assertThat(result.getDdd()).isEqualTo("");
         assertThat(result.getSiafi()).isEqualTo("");
+        assertThat(result.getProvedor()).isEqualTo("BrasilApiCep");
     }
 }

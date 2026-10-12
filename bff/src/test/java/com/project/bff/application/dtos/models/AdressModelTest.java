@@ -13,8 +13,8 @@ public class AdressModelTest {
     @DisplayName("Test AddressModel Constructor and Getters")
     @ParameterizedTest
     @CsvSource({
-            "12345-678, Rua Exemplo 1, Apto 101, Centro, Cidade Exemplo 1, EX, 1234567, 98765, 11, 1234",
-            "56789-012, Rua Exemplo 2, Apto 102, Centro, Cidade Exemplo 2, AX, 5678901, 54321, 11, 5678"
+            "12345-678, Rua Exemplo 1, Apto 101, Centro, Cidade Exemplo 1, EX, 1234567, 98765, 11, 1234, ViaCep",
+            "56789-012, Rua Exemplo 2, Apto 102, Centro, Cidade Exemplo 2, AX, 5678901, 54321, 11, 5678, BrasilApiCep"
     })
     public void testAddressModelConstructorAndGetters(String cep,
             String logradouro,
@@ -25,12 +25,14 @@ public class AdressModelTest {
             String ibge,
             String gia,
             String ddd,
-            String siafi) {
+            String siafi,
+            String provedor) {
         // Arrange
         AddressModel addressModel;
 
         // Act
-        addressModel = new AddressModel(cep, logradouro, complemento, bairro, localidade, uf, ibge, gia, ddd, siafi);
+        addressModel = new AddressModel(cep, logradouro, complemento, bairro, localidade, uf, ibge, gia, ddd, siafi,
+                provedor);
 
         // Assert
         assertThat(addressModel).isNotNull();
@@ -44,5 +46,6 @@ public class AdressModelTest {
         assertThat(addressModel.getGia()).isEqualTo(gia);
         assertThat(addressModel.getDdd()).isEqualTo(ddd);
         assertThat(addressModel.getSiafi()).isEqualTo(siafi);
+        assertThat(addressModel.getProvedor()).isEqualTo(provedor);
     }
 }

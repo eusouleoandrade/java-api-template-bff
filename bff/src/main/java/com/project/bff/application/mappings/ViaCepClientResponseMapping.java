@@ -19,6 +19,7 @@ public class ViaCepClientResponseMapping {
                 response.getIbge(),
                 response.getGia(),
                 response.getDdd(),
-                response.getSiafi());
+                response.getSiafi(),
+                "ViaCep");
     }
 }
